@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 🔐 企业级安全主题 -->
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <!-- 安全主题颜色 -->
+        <item name="android:colorPrimary">#1976D2</item>
+        <item name="android:colorPrimaryDark">#0D47A1</item>
+        <item name="android:colorAccent">#FF5722</item>
+        
+        <!-- 🛡️ 安全窗口标志 -->
+        <item name="android:windowSecure">true</item>
+        <item name="android:windowDisablePreview">true</item>
+        
+        <!-- 企业级安全配置 -->
+        <item name="android:windowBackground">@color/security_background</item>
+    </style>
+
+    <!-- 🚨 安全加载主题 -->
+    <style name="SecurityLoadingTheme" parent="AppTheme">
+        <item name="android:windowBackground">@drawable/security_splash</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowSecure">true</item>
+    </style>
+</resources>

@@ -1,0 +1,31 @@
+{
+  "name": "PhotoManagerAndroid",
+  "displayName": "🔐 安全图片管理 (Android)",
+  "description": "企业级安全图片管理系统 - Android平台",
+  "version": "1.0.0",
+  "versionCode": 1,
+  "minSdkVersion": 21,
+  "targetSdkVersion": 34,
+  "compileSdkVersion": 34,
+  "buildToolsVersion": "34.0.0",
+  "permissions": [
+    "android.permission.INTERNET",
+    "android.permission.CAMERA",
+    "android.permission.READ_EXTERNAL_STORAGE",
+    "android.permission.WRITE_EXTERNAL_STORAGE",
+    "android.permission.ACCESS_NETWORK_STATE"
+  ],
+  "security": {
+    "screenshotProtection": true,
+    "deviceDetection": true,
+    "rootDetection": true,
+    "debugDetection": true,
+    "enterpriseLevel": true
+  },
+  "features": {
+    "nativeSecurityModule": true,
+    "watermarkProtection": true,
+    "secureImageViewing": true,
+    "userManagement": true
+  }
+}

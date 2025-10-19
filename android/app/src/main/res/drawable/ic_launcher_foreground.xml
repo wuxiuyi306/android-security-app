@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    
+    <group android:scaleX="0.58"
+        android:scaleY="0.58"
+        android:translateX="22.68"
+        android:translateY="22.68">
+        
+        <!-- 🛡️ 安全盾牌图标 -->
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M54,10L54,10C54,10 54,10 54,10L54,54L54,54C54,54 54,54 54,54L54,98L54,98C54,98 54,98 54,98L10,54L54,10Z" />
+        
+        <!-- 🔒 锁图标 -->
+        <path
+            android:fillColor="#FF5722"
+            android:pathData="M40,35h4v-4c0,-4.42 3.58,-8 8,-8s8,3.58 8,8v4h4c2.21,0 4,1.79 4,4v20c0,2.21 -1.79,4 -4,4H40c-2.21,0 -4,-1.79 -4,-4V39C36,36.79 37.79,35 40,35zM48,31c0,-2.21 1.79,-4 4,-4s4,1.79 4,4v4h-8V31z" />
+    </group>
+</vector>

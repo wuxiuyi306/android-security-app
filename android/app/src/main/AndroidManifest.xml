@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Android应用清单 - 企业级安全标准
+  
+  🔒 核心价值：配置Android原生安全权限和保护机制
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.photomanagerandroid">
+
+    <!-- 🔐 企业级安全权限配置 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    
+    <!-- 🛡️ 安全检测相关权限 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+    <!-- 🚨 企业级安全特性配置 -->
+    <application
+        android:name=".MainApplication"
+        android:label="@string/app_name"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:allowBackup="false"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="false"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:debuggable="false"
+        android:extractNativeLibs="false">
+
+        <!-- 🔐 主活动 - Android安全入口 -->
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|uiMode"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="portrait"
+            android:exported="true">
+            
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- 🛡️ 企业级安全配置 -->
+        <meta-data
+            android:name="com.photomanagerandroid.security.enterprise_mode"
+            android:value="true" />
+        
+        <meta-data
+            android:name="com.photomanagerandroid.security.screenshot_protection"
+            android:value="true" />
+            
+        <meta-data
+            android:name="com.photomanagerandroid.security.device_detection"
+            android:value="true" />
+            
+        <meta-data
+            android:name="com.photomanagerandroid.security.zero_tolerance"
+            android:value="true" />
+    </application>
+
+    <!-- 🔒 企业级安全限制 -->
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+        
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
+
+</manifest>

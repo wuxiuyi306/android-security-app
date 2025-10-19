@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 🔐 企业级安全配色方案 -->
+    <color name="security_primary">#1976D2</color>
+    <color name="security_primary_dark">#0D47A1</color>
+    <color name="security_accent">#FF5722</color>
+    <color name="security_background">#000000</color>
+    <color name="security_surface">#1A1A1A</color>
+    <color name="security_error">#F44336</color>
+    <color name="security_warning">#FF9800</color>
+    <color name="security_success">#4CAF50</color>
+    
+    <!-- 安全状态指示颜色 -->
+    <color name="security_protected">#2E7D32</color>
+    <color name="security_vulnerable">#D32F2F</color>
+    <color name="security_unknown">#757575</color>
+</resources>

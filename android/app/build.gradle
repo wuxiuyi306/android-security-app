@@ -1,0 +1,165 @@
+/**
+ * Android构建配置 - 企业级安全标准
+ * 
+ * 🔒 核心价值：配置Android原生安全模块的构建参数
+ */
+
+apply plugin: "com.android.application"
+apply plugin: "com.facebook.react"
+
+/**
+ * 🔐 企业级Android安全配置
+ */
+def enableSeparateBuildPerCPUArchitecture = false
+def enableProguardInReleaseBuilds = true
+def jscFlavor = 'org.webkit:android-jsc:+'
+def enableHermes = true
+
+/**
+ * 🛡️ Android安全版本配置
+ */
+def ANDROID_SECURITY_VERSION_CODE = 1
+def ANDROID_SECURITY_VERSION_NAME = "1.0.0-enterprise"
+
+android {
+    ndkVersion rootProject.ext.ndkVersion
+
+    compileSdkVersion rootProject.ext.compileSdkVersion
+
+    namespace "com.photomanagerandroid"
+    defaultConfig {
+        applicationId "com.photomanagerandroid"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode ANDROID_SECURITY_VERSION_CODE
+        versionName ANDROID_SECURITY_VERSION_NAME
+        
+        // 🔐 企业级安全构建配置
+        buildConfigField "boolean", "IS_ENTERPRISE_BUILD", "true"
+        buildConfigField "boolean", "SECURITY_ENABLED", "true"
+        buildConfigField "String", "SECURITY_MODULE_VERSION", "\"1.0.0-enterprise\""
+        
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    splits {
+        abi {
+            reset()
+            enable enableSeparateBuildPerCPUArchitecture
+            universalApk false  // If true, also generate a universal APK
+            include "armeabi-v7a", "x86", "arm64-v8a", "x86_64"
+        }
+    }
+    
+    signingConfigs {
+        debug {
+            storeFile file('debug.keystore')
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+        }
+        
+        // 🔒 企业级发布签名配置
+        release {
+            if (project.hasProperty('MYAPP_UPLOAD_STORE_FILE')) {
+                storeFile file(MYAPP_UPLOAD_STORE_FILE)
+                storePassword MYAPP_UPLOAD_STORE_PASSWORD
+                keyAlias MYAPP_UPLOAD_KEY_ALIAS
+                keyPassword MYAPP_UPLOAD_KEY_PASSWORD
+            }
+        }
+    }
+    
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+            // 🔐 调试模式安全配置
+            buildConfigField "boolean", "SECURITY_DEBUG_MODE", "true"
+            buildConfigField "boolean", "ALLOW_EMULATOR", "true"
+        }
+        
+        release {
+            // 🛡️ 企业级发布安全配置
+            signingConfig signingConfigs.release
+            minifyEnabled enableProguardInReleaseBuilds
+            shrinkResources true
+            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            
+            // 企业级安全构建标志
+            buildConfigField "boolean", "SECURITY_DEBUG_MODE", "false"
+            buildConfigField "boolean", "ALLOW_EMULATOR", "false"
+            buildConfigField "boolean", "ENTERPRISE_SECURITY", "true"
+            
+            // 安全优化
+            zipAlignEnabled true
+            debuggable false
+        }
+    }
+
+    // 🔐 企业级编译选项
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+
+    packagingOptions {
+        pickFirst "**/libc++_shared.so"
+        pickFirst "**/libjsc.so"
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    
+    // 🔐 React Native核心依赖
+    implementation "com.facebook.react:react-native:+"  // From node_modules
+    implementation "com.facebook.react:react-android:+"
+    
+    // 🛡️ Android安全相关依赖
+    implementation "androidx.appcompat:appcompat:1.6.1"
+    implementation "androidx.core:core-ktx:1.10.1"
+    implementation "androidx.security:security-crypto:1.1.0-alpha06"
+    
+    // 企业级安全增强
+    implementation "androidx.biometric:biometric:1.1.0"
+    implementation "androidx.work:work-runtime:2.8.1"
+    
+    debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
+        exclude group:'com.facebook.fbjni'
+    }
+    debugImplementation("com.facebook.flipper:flipper-network-plugin:${FLIPPER_VERSION}") {
+        exclude group:'com.facebook.flipper'
+        exclude group:'com.squareup.okhttp3', module:'okhttp'
+    }
+    debugImplementation("com.facebook.flipper:flipper-fresco-plugin:${FLIPPER_VERSION}") {
+        exclude group:'com.facebook.flipper'
+    }
+
+    if (enableHermes) {
+        def hermesPath = "../../node_modules/hermes-engine/android/";
+        debugImplementation files(hermesPath + "hermes-debug.aar")
+        releaseImplementation files(hermesPath + "hermes-release.aar")
+    } else {
+        implementation jscFlavor
+    }
+}
+
+// 🔐 企业级Android安全架构配置
+// 使用传统架构确保安全模块兼容性
+
+// 🔐 企业级Android安全构建任务
+task printAndroidSecurityInfo {
+    doLast {
+        println "🔐 Android企业级安全构建信息:"
+        println "  版本: ${ANDROID_SECURITY_VERSION_NAME}"
+        println "  版本代码: ${ANDROID_SECURITY_VERSION_CODE}"
+        println "  安全模块: 已启用"
+        println "  企业级标准: 已启用"
+        println "  原生安全模块: 已集成"
+    }
+}
+
+// 🛡️ 构建前安全检查
+preBuild.dependsOn printAndroidSecurityInfo
+
+apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)

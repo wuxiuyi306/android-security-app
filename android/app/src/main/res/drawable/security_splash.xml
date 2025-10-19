@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  企业级安全启动画面
+  🔒 显示安全模块加载状态
+-->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 背景 -->
+    <item android:drawable="@color/security_background"/>
+    
+    <!-- 安全图标 -->
+    <item>
+        <bitmap
+            android:gravity="center"
+            android:src="@mipmap/ic_launcher"/>
+    </item>
+    
+    <!-- 安全文本 -->
+    <item android:gravity="bottom|center_horizontal">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/security_primary"/>
+            <corners android:radius="8dp"/>
+        </shape>
+    </item>
+</layer-list>

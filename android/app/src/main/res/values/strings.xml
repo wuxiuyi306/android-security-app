@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">🔒 安全图片管理</string>
+    <string name="security_module_name">Android企业级安全模块</string>
+    <string name="security_protection_enabled">安全保护已启用</string>
+    <string name="screenshot_blocked">截屏已被安全模块阻止</string>
+    <string name="device_security_warning">设备安全检测警告</string>
+    <string name="enterprise_security_active">企业级安全防护激活</string>
+</resources>
